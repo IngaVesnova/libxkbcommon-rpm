@@ -14,7 +14,9 @@ BuildRequires:  meson
 BuildRequires:  ninja-build
 BuildRequires:  pkgconfig
 BuildRequires:  bison
+BuildRequires: pkgconfig(xkeyboard-config)
 BuildRequires:  pkgconfig(xcb)
+BuildRequires: pkgconfig(libxml2)
 
 %description
 xkbcommon is a keymap compiler and support library which processes
