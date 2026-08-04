@@ -15,8 +15,9 @@ BuildRequires:  ninja-build
 BuildRequires:  pkgconfig
 BuildRequires:  bison
 BuildRequires: pkgconfig(xkeyboard-config)
-BuildRequires:  pkgconfig(xcb)
-BuildRequires: pkgconfig(libxml)
+BuildRequires:  pkgconfig(xcb) >= 1.10
+BuildRequires:  pkgconfig(xcb-xkb) >= 1.10
+BuildRequires:  pkgconfig(libxml-2.0)
 
 %description
 xkbcommon is a keymap compiler and support library which processes
@@ -44,12 +45,27 @@ Requires:       %{name}-devel%{?_isa} = %{version}-%{release}
 %description    x11-devel
 Development files for X11 support of %{name}.
 
+%package        registry
+Summary:        XKB registry library
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+
+%description    registry
+XKB registry library for querying available rules, models, layouts, variants and options.
+
+%package        registry-devel
+Summary:        Development files for XKB registry library
+Requires:       %{name}-registry%{?_isa} = %{version}-%{release}
+Requires:       %{name}-devel%{?_isa} = %{version}-%{release}
+
+%description    registry-devel
+Development files for XKB registry library.
+
 %prep
 %autosetup -n libxkbcommon-xkbcommon-%{version}
 
 %build
 %meson \
-  -Denable-docs=false \
+  -Denable-docs=false
 
 %meson_build
 
@@ -62,7 +78,9 @@ Development files for X11 support of %{name}.
 %{_libexecdir}/xkbcommon/
 
 %files devel
-%{_includedir}/xkbcommon/
+%{_includedir}/xkbcommon/xkbcommon*.h
+%exclude %{_includedir}/xkbcommon/xkbcommon-x11.h
+%exclude %{_includedir}/xkbcommon/xkbregistry.h
 %{_libdir}/libxkbcommon.so
 %{_libdir}/pkgconfig/xkbcommon.pc
 
@@ -70,8 +88,17 @@ Development files for X11 support of %{name}.
 %{_libdir}/libxkbcommon-x11.so.*
 
 %files x11-devel
+%{_includedir}/xkbcommon/xkbcommon-x11.h
 %{_libdir}/libxkbcommon-x11.so
 %{_libdir}/pkgconfig/xkbcommon-x11.pc
+
+%files registry
+%{_libdir}/libxkbregistry.so.*
+
+%files registry-devel
+%{_includedir}/xkbcommon/xkbregistry.h
+%{_libdir}/libxkbregistry.so
+%{_libdir}/pkgconfig/xkbregistry.pc
 
 %changelog
 * Tue Aug 04 2026 Custom Maintainer - 1.8.0-1
