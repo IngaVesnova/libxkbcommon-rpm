@@ -18,6 +18,10 @@ BuildRequires: pkgconfig(xkeyboard-config)
 BuildRequires:  pkgconfig(xcb) >= 1.10
 BuildRequires:  pkgconfig(xcb-xkb) >= 1.10
 BuildRequires:  pkgconfig(libxml-2.0)
+BuildRequires:  pkgconfig(wayland-client) >= 1.2.0
+BuildRequires:  pkgconfig(wayland-protocols) >= 1.12
+BuildRequires: pkgconfig(wayland-scanner)
+BuildRequires:  pkgconfig(icu-uc)
 
 %description
 xkbcommon is a keymap compiler and support library which processes
@@ -65,7 +69,8 @@ Development files for XKB registry library.
 
 %build
 %meson \
-  -Denable-docs=false
+  -Denable-docs=false \
+  -Denable-bash-completion=false
 
 %meson_build
 
