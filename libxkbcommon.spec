@@ -64,6 +64,13 @@ Requires:       %{name}-devel%{?_isa} = %{version}-%{release}
 %description    registry-devel
 Development files for XKB registry library.
 
+%package        tools
+Summary:        CLI tools for %{name}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+
+%description    tools
+Tools to inspect, verify and test keymaps (xkbcli).
+
 %prep
 %autosetup -n libxkbcommon-xkbcommon-%{version}
 
@@ -104,6 +111,10 @@ Development files for XKB registry library.
 %{_includedir}/xkbcommon/xkbregistry.h
 %{_libdir}/libxkbregistry.so
 %{_libdir}/pkgconfig/xkbregistry.pc
+
+%files tools
+%{_bindir}/xkbcli
+%{_mandir}/man1/xkbcli*.1*
 
 %changelog
 * Tue Aug 04 2026 Custom Maintainer - 1.8.0-1
