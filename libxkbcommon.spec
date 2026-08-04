@@ -16,7 +16,7 @@ BuildRequires:  pkgconfig
 BuildRequires:  bison
 BuildRequires: pkgconfig(xkeyboard-config)
 BuildRequires:  pkgconfig(xcb)
-BuildRequires: pkgconfig(libxml2)
+BuildRequires: pkgconfig(libxml)
 
 %description
 xkbcommon is a keymap compiler and support library which processes
